@@ -17,5 +17,5 @@ export PATH=$PATH:~/{code-directory}/bash-util-scripts
 
 ```bash
 # make a script executable
-chmod u+x ./{script_name.sh}
+chmod u+x ./{script_name}
 ```
