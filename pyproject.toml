@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "set-creds"
+version = "0.1.0"
+description = "Python script to automate retrieving and setting AWS multi-factor authentication credentials for AWS CLI use."
+authors = ["Sam Atkins <samatkins@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "3.6"
+python-dotenv = "^0.9.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+pytest-cov = "^2.5"
+yapf = "^0.23.0"
+flake8 = "^3.5"
