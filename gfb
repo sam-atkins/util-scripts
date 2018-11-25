@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# git command to fetch and pull current branch from remote
+git fetch && git pull origin $(git_current_branch)
