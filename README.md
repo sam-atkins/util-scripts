@@ -17,6 +17,14 @@ A collection of scripts to automate repeated and mundane tasks.
 creds <mfa-token>
 ```
 
+### Foreign Currency Exchange
+
+```bash
+fx
+# and follow the prompts. Script is fairly basic at the moment so make sure to
+# type currency abbreviations correctly
+```
+
 ### Prune Git Branches
 
 ```bash
