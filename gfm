@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# git command to switch to master branch, fetch and pull latest from remote
+git checkout master && git fetch && git pull origin master

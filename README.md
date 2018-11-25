@@ -25,9 +25,28 @@ fx
 # type currency abbreviations correctly
 ```
 
-### Prune Git Branches
+### Git Fetch and Pull from Remote Current Branch
 
 ```bash
+gfb
+```
+
+### Git Fetch and Pull from Remote Master
+
+```bash
+gfm
+```
+
+### Git Log Graph Pretty
+
+```bash
+glogg
+```
+
+### Git Prune Branches
+
+```bash
+# run from dir where you want to prune branches
 prune [-d|-D]
 ```
 
