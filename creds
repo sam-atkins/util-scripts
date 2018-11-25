@@ -2,7 +2,7 @@
 
 source /Users/samatkins/code/util-scripts/env/bin/activate;
 
-python /Users/samatkins/code/util-scripts/set_creds/set_creds.py $1;
+python /Users/samatkins/code/util-scripts/src/set_creds/set_creds.py $1;
 
 source /Users/samatkins/.bh_creds/aws;
 
