@@ -1,16 +1,8 @@
 import re
 
-import requests
+from api import api_request
 
 AVAILABLE_CURRENCIES = "EUR GBP PLN USD"
-
-
-def _api_request(method, url, params):
-    try:
-        response = requests.request(method=method, url=url, params=params)
-        return response
-    except Exception as ex:
-        raise Exception(f"Unsuccessful attempt to hit endpoint {url}: {ex}")
 
 
 def get_user_input():
@@ -36,7 +28,7 @@ def convert_currency(currency_info):
     params = {
         'base': base
     }
-    response = _api_request(method=method, url=url, params=params)
+    response = api_request(method=method, url=url, params=params)
     rates = response.json()
     fx_rate = rates.get('rates').get(target)
     if fx_rate is not None:

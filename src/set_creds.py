@@ -55,6 +55,7 @@ def write_creds_to_file(creds):
         print(f"export AWS_SESSION_TOKEN={creds[1]}", file=text_file)
         print(f"export AWS_ACCESS_KEY_ID={creds[2]}", file=text_file)
     print("Adding creds to file...")
+    print("Creds added to file.")
 
 
 def control():
@@ -63,7 +64,6 @@ def control():
     print(creds)
     parsed_creds = parse_creds_response(creds)
     write_creds_to_file(parsed_creds)
-    print("Creds added to file...")
 
 
 if __name__ == '__main__':

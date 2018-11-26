@@ -4,4 +4,4 @@
 
 source /Users/samatkins/code/util-scripts/env/bin/activate;
 
-python /Users/samatkins/code/util-scripts/src/fx/fx.py;
+python /Users/samatkins/code/util-scripts/src/fx.py;

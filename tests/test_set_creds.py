@@ -1,7 +1,7 @@
 import json
 
-from src.set_creds import __version__
-from src.set_creds.set_creds import parse_creds_response
+from src import __version__
+from src.set_creds import parse_creds_response
 from tests.datasets import response
 
 
