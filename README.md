@@ -51,6 +51,18 @@ glogg
 prune [-d|-D]
 ```
 
+### Movie
+
+```bash
+movie <film title>
+
+# example, single word film title
+movie jaws
+
+# example, multi-word film title
+movie 'star wars'
+```
+
 ### Pyclean
 
 ```bash
