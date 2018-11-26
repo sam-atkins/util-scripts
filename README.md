@@ -1,6 +1,6 @@
 # Utility Scripts
 
-A collection of scripts to automate repeated and mundane tasks.
+A collection of scripts to automate repeated and mundane tasks. Some of these could be set-up as aliases but this keeps everything organised in one repo.
 
 ## Table of Contents
 
@@ -34,6 +34,7 @@ gfb
 ### Git Fetch and Pull from Remote Master
 
 ```bash
+# note, this switches branch to master
 gfm
 ```
 
@@ -53,14 +54,21 @@ prune [-d|-D]
 ### Pyclean
 
 ```bash
-# run from dir where you want to clean .pyo, .pyc, __pycache
+# run from dir where you want to clean .pyo .pyc __pycache__
 pyclean
+```
+
+### Trash
+
+```bash
+# empties the Trash on MacOS
+trash
 ```
 
 ### Weather
 
 ```bash
-# Usage: `weather.sh CITYNAME` or just `weather.sh` to use IP location.
+# Usage: `weather CITYNAME` or just `weather` to use IP location.
 weather <city>
 ```
 
@@ -68,11 +76,13 @@ weather <city>
 
 ### Pre-requisites
 
-* AWS CLI
-* AWS credentials file per [this](https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/)
 * Python 3
 * Poetry
 
+(And for the AWS credentials script)
+
+* AWS CLI
+* AWS credentials file per [this](https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/)
 
 ### Git clone and add to $PATH
 
