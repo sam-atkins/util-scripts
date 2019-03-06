@@ -54,6 +54,9 @@ def write_creds_to_file(creds):
         print(f"export AWS_SECRET_ACCESS_KEY={creds[0]}", file=text_file)
         print(f"export AWS_SESSION_TOKEN={creds[1]}", file=text_file)
         print(f"export AWS_ACCESS_KEY_ID={creds[2]}", file=text_file)
+        print(f"export GIT_TOKEN={GIT_TOKEN}", file=text_file)
+        print(
+            f"export AWS_DEFAULT_REGION={AWS_DEFAULT_REGION}", file=text_file)
     print("Adding creds to file...")
     print("Creds added to file.")
 
