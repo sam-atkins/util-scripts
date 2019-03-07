@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Empties the trash on macOS
-# [ -d ~/.Trash ] evalutes if this is a valid dir and if exits with 0, it is true
-[ -d ~/.Trash ] && rm -rf ~/.Trash/* && echo "Trash emptied 🗑"
