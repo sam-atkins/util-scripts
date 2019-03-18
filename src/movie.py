@@ -63,7 +63,7 @@ def film_print_stdout(title, year, runtime, rotten_tomatoes_score,
     print('==================================================')
 
 
-def cli():
+def main():
     parser = argparse.ArgumentParser(description="Parse film title from user")
     parser.add_argument("film_title")
     args = parser.parse_args()
@@ -73,4 +73,4 @@ def cli():
 
 
 if __name__ == '__main__':
-    cli()
+    main()

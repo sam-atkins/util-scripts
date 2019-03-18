@@ -40,10 +40,10 @@ def convert_currency(currency_info):
         print("Unable to get fx rate and calculate currency conversion")
 
 
-def control():
+def main():
     user_input = get_user_input()
     convert_currency(user_input)
 
 
 if __name__ == '__main__':
-    control()
+    main()
