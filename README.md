@@ -15,7 +15,7 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 Used to request session tokens as part of using AWS CLI when your AWS profile has MFA set-up.
 
 ```bash
-creds <profile ><mfa-token>
+creds <profile> <mfa-token>
 ```
 
 ### Foreign Currency Exchange
