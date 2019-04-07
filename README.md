@@ -26,32 +26,6 @@ fx
 # type currency abbreviations correctly
 ```
 
-### Git Fetch and Pull from Remote Current Branch
-
-```bash
-gfb
-```
-
-### Git Fetch and Pull from Remote Master
-
-```bash
-# note, this switches branch to master
-gfm
-```
-
-### Git Log Graph Pretty
-
-```bash
-glogg
-```
-
-### Git Prune Branches
-
-```bash
-# run from dir where you want to prune branches
-prune [-d|-D]
-```
-
 ### Movie
 
 ```bash
@@ -62,20 +36,6 @@ movie jaws
 
 # example, multi-word film title
 movie 'star wars'
-```
-
-### Pyclean
-
-```bash
-# run from dir where you want to clean .pyo .pyc __pycache__
-pyclean
-```
-
-### Trash
-
-```bash
-# empties the Trash on MacOS
-trash
 ```
 
 ### Weather
