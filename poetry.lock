@@ -3,7 +3,6 @@ category = "dev"
 description = "Atomic file writes."
 name = "atomicwrites"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.2.1"
 
@@ -12,7 +11,6 @@ category = "dev"
 description = "Classes Without Boilerplate"
 name = "attrs"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "18.2.0"
 
@@ -21,7 +19,6 @@ category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "2018.10.15"
 
@@ -30,28 +27,23 @@ category = "main"
 description = "Universal encoding detector for Python 2 and 3"
 name = "chardet"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "3.0.4"
 
 [[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
+marker = "sys_platform == \"win32\""
 name = "colorama"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.4.0"
-
-[package.requirements]
-platform = "win32"
 
 [[package]]
 category = "dev"
 description = "Code coverage measurement for Python"
 name = "coverage"
 optional = false
-platform = "*"
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4"
 version = "4.5.2"
 
@@ -60,7 +52,6 @@ category = "dev"
 description = "the modular source code checker: pep8, pyflakes and co"
 name = "flake8"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "3.6.0"
 
@@ -75,7 +66,6 @@ category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
 name = "idna"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "2.7"
 
@@ -84,7 +74,6 @@ category = "dev"
 description = "McCabe checker, plugin for flake8"
 name = "mccabe"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "0.6.1"
 
@@ -93,7 +82,6 @@ category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "4.3.0"
 
@@ -105,7 +93,6 @@ category = "dev"
 description = "plugin and hook calling mechanisms for python"
 name = "pluggy"
 optional = false
-platform = "unix"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.8.0"
 
@@ -114,7 +101,6 @@ category = "dev"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
 name = "py"
 optional = false
-platform = "unix"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.7.0"
 
@@ -123,7 +109,6 @@ category = "dev"
 description = "Python style guide checker"
 name = "pycodestyle"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "2.4.0"
 
@@ -132,7 +117,6 @@ category = "dev"
 description = "passive checker of Python programs"
 name = "pyflakes"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.0.0"
 
@@ -141,29 +125,24 @@ category = "dev"
 description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
-platform = "unix"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "3.10.1"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
 attrs = ">=17.4.0"
+colorama = "*"
 more-itertools = ">=4.0.0"
 pluggy = ">=0.7"
 py = ">=1.5.0"
 setuptools = "*"
 six = ">=1.10.0"
 
-[package.dependencies.colorama]
-platform = "win32"
-version = "*"
-
 [[package]]
 category = "dev"
 description = "Pytest plugin for measuring coverage."
 name = "pytest-cov"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.6.0"
 
@@ -176,7 +155,6 @@ category = "main"
 description = "Add .env support to your django/flask apps in development and deployments"
 name = "python-dotenv"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "0.9.1"
 
@@ -185,7 +163,6 @@ category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.20.1"
 
@@ -200,7 +177,6 @@ category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
-platform = "*"
 python-versions = "*"
 version = "1.11.0"
 
@@ -209,23 +185,12 @@ category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
 optional = false
-platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
 version = "1.24.1"
 
-[[package]]
-category = "dev"
-description = "A formatter for Python code."
-name = "yapf"
-optional = false
-platform = "*"
-python-versions = "*"
-version = "0.23.0"
-
 [metadata]
-content-hash = "be6564c84b94377ed7de9168c9fb2a6efd16a9fb7e1d9f0e2c681b8d44808e56"
-platform = "*"
-python-versions = "3.6"
+content-hash = "352cc235087172668eabd4db86c7e0ee66c996be6fb50a40a4b33f310edcef27"
+python-versions = "3.6.6"
 
 [metadata.hashes]
 atomicwrites = ["0312ad34fcad8fac3704d441f7b317e50af620823353ec657a53e981f92920c0", "ec9ae8adaae229e4f8446952d204a3e4b5fdd2d099f9be3aaf556120135fb3ee"]
@@ -248,4 +213,3 @@ python-dotenv = ["122290a38ece9fe4f162dc7c95cae3357b983505830a154d3c98ef7f6c6cea
 requests = ["65b3a120e4329e33c9889db89c80976c5272f56ea92d3e74da8a463992e3ff54", "ea881206e59f41dbd0bd445437d792e43906703fff75ca8ff43ccdb11f33f263"]
 six = ["70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9", "832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb"]
 urllib3 = ["61bf29cada3fc2fbefad4fdf059ea4bd1b4a86d2b6d15e1c7c0b582b9752fe39", "de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663385c6a9c22"]
-yapf = ["330632d2592e67571ef2c113fe6f5802e2fa5d657448755d5546eea00693dc31", "55ead4ff1cc1cba5ad7dcfca88fe3930c2ec912c1cfe4a152aa0e7572ff1b49f"]
