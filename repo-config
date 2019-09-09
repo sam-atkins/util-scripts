@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /Users/samatkins/code/util-scripts/env/bin/activate;
+python /Users/samatkins/code/util-scripts/src/repo_config.py $1;

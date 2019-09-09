@@ -38,6 +38,18 @@ movie jaws
 movie 'star wars'
 ```
 
+### Repo Config
+
+Adds `pyrightconfig.json` and if default Black formatting settings need to be overridden,
+adds `./.vscode/settings.json` with appropriate Python config.
+
+```bash
+repo-config <language>
+
+# python
+repo-config python
+```
+
 ### Weather
 
 ```bash
