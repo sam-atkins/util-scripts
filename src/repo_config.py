@@ -11,7 +11,9 @@ import json
 import os
 from typing import List
 
-PythonConfig = namedtuple("python_config", ["formatter", "pyright", "editorconfig"])
+PythonConfig = namedtuple(
+    "python_config", ["formatter", "pyright", "editorconfig", "setup_cfg"]
+)
 
 EDITORCONFIG_PATH = ".editorconfig"
 EDITORCONFIG_TEMPLATE_PATH = "./src/repo_config_templates/editorconfig.template"
@@ -24,13 +26,14 @@ PYRIGHT_CONFIG = {
     "pythonVersion": "3.6",
 }
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
+SETUP_CFG_PATH = "setup.cfg"
+SETUP_CFG_TEMPLATE_PATH = "./src/repo_config_templates/setup.cfg.template"
 VSCODE_PYTHON_CONFIG = {
     "python.formatting.provider": "yapf",
     "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True},
 }
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
-# TODO(sam) add templates
-# setup.cfg template
+# TODO(sam) js
 # VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 
 
@@ -74,6 +77,7 @@ def confirm_python_config():
     formatter_config = False
     pyright_config = False
     editorconfig = False
+    setup_cfg = False
 
     formatter_required = get_user_input(
         input_str="black or yapf formatting? (black | b | yapf | y)",
@@ -96,7 +100,16 @@ def confirm_python_config():
     if editorconfig_required.lower() in ["yes", "y"]:
         editorconfig = True
 
-    python_config = PythonConfig(formatter_config, pyright_config, editorconfig)
+    setup_cfg_required = get_user_input(
+        input_str="add setup.cfg (yes | y | no | n)?",
+        input_validation=input_validation_yes_no,
+    )
+    if setup_cfg_required.lower() in ["yes", "y"]:
+        setup_cfg = True
+
+    python_config = PythonConfig(
+        formatter_config, pyright_config, editorconfig, setup_cfg
+    )
 
     return python_config
 
@@ -120,6 +133,10 @@ def create_repo_files(language: str):
             write_file(
                 output_file_path=EDITORCONFIG_PATH,
                 file_template=EDITORCONFIG_TEMPLATE_PATH,
+            )
+        if python_config.setup_cfg:
+            write_file(
+                output_file_path=SETUP_CFG_PATH, file_template=SETUP_CFG_TEMPLATE_PATH
             )
     elif language.lower() in ["js", "javascript"]:
         print("js let's do this")
