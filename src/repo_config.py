@@ -5,6 +5,9 @@ VS Code defaults are set to Black, formatOnSave True and formatOnPaste False.
 A VS Code settings file can be added to override with Yapf formatting to override on
 a repo specific basis
 
+##### SETUP #####
+Ensure you have a HOME env variable setup
+
 TODO(sam) refactor to make it configuration based to simplify adding/removing config
           files to a script workflow
 """
@@ -19,8 +22,12 @@ PythonConfig = namedtuple(
 )
 JSConfig = namedtuple("js_config", ["theme", "editorconfig"])
 
+
+HOME = os.environ["HOME"]
 EDITORCONFIG_PATH = ".editorconfig"
-EDITORCONFIG_TEMPLATE_PATH = "./src/repo_config_templates/editorconfig.template"
+EDITORCONFIG_TEMPLATE_PATH = (
+    f"{HOME}/code/util-scripts/src/repo_config_templates/editorconfig.template"
+)
 JSON_INDENT = 2
 JSON_SORT_KEYS = True
 PYRIGHT_CONFIG = {
@@ -31,7 +38,9 @@ PYRIGHT_CONFIG = {
 }
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
 SETUP_CFG_PATH = "setup.cfg"
-SETUP_CFG_TEMPLATE_PATH = "./src/repo_config_templates/setup.cfg.template"
+SETUP_CFG_TEMPLATE_PATH = (
+    f"{HOME}/code/util-scripts/src/repo_config_templates/setup.cfg.template"
+)
 VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 VSCODE_PYTHON_CONFIG = {
     "python.formatting.provider": "yapf",
