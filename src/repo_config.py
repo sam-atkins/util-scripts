@@ -8,8 +8,9 @@ a repo specific basis
 ##### SETUP #####
 Ensure you have a HOME env variable setup
 
-TODO(sam) refactor to make it configuration based to simplify adding/removing config
-          files to a script workflow
+TODO(sam)
+- refactor to make it configuration based to simplify changing a script workflow
+- add flags e.g. --menu asks for options of what files to add; --pyright adds pyright
 """
 import argparse
 from collections import namedtuple
@@ -18,7 +19,8 @@ import os
 from typing import List
 
 PythonConfig = namedtuple(
-    "python_config", ["formatter", "pyright", "editorconfig", "setup_cfg"]
+    "python_config",
+    ["formatter", "pyright", "editorconfig", "setup_cfg", "py_dev_deps"],
 )
 JSConfig = namedtuple("js_config", ["theme", "editorconfig"])
 
@@ -46,6 +48,10 @@ VSCODE_PYTHON_CONFIG = {
     "python.formatting.provider": "yapf",
     "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True},
 }
+VSCODE_PY_DEV_DEPENDENCIES_PATH = "./.vscode/requirements-dev.txt"
+VSCODE_PY_DEV_DEPENDENCIES_TEMPLATE_PATH = (
+    f"{HOME}/code/util-scripts/src/repo_config_templates/requirements-dev.txt.template"
+)
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
 
 
@@ -106,6 +112,7 @@ def confirm_python_config():
     pyright_config = False
     editorconfig = False
     setup_cfg = False
+    py_dev_deps = False
 
     formatter_required = get_user_input(
         input_str="black or yapf formatting? (black | b | yapf | y)",
@@ -135,8 +142,15 @@ def confirm_python_config():
     if setup_cfg_required.lower() in ["yes", "y"]:
         setup_cfg = True
 
+    py_dev_deps_required = get_user_input(
+        input_str="add Python deps for VSCode (yes | y | no | n)?",
+        input_validation=input_validation_yes_no,
+    )
+    if py_dev_deps_required.lower() in ["yes", "y"]:
+        py_dev_deps = True
+
     python_config = PythonConfig(
-        formatter_config, pyright_config, editorconfig, setup_cfg
+        formatter_config, pyright_config, editorconfig, setup_cfg, py_dev_deps
     )
 
     return python_config
@@ -145,8 +159,8 @@ def confirm_python_config():
 def create_repo_files(language: str):
     if language.lower() in ["python", "py"]:
         python_config = confirm_python_config()
+        make_dir("./.vscode")
         if python_config.formatter:
-            make_dir("./.vscode")
             write_json_file(
                 output_file_path=VSCODE_SETTINGS_FILE_PATH,
                 file_config=VSCODE_PYTHON_CONFIG,
@@ -166,8 +180,14 @@ def create_repo_files(language: str):
             write_file(
                 output_file_path=SETUP_CFG_PATH, file_template=SETUP_CFG_TEMPLATE_PATH
             )
+        if python_config.py_dev_deps:
+            write_file(
+                output_file_path=VSCODE_PY_DEV_DEPENDENCIES_PATH,
+                file_template=VSCODE_PY_DEV_DEPENDENCIES_TEMPLATE_PATH,
+            )
     elif language.lower() in ["js", "javascript"]:
         js_config = confirm_js_config()
+        make_dir("./.vscode")
         if js_config.theme:
             make_dir("./.vscode")
             write_json_file(
