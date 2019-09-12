@@ -9,10 +9,12 @@ import argparse
 from collections import namedtuple
 import json
 import os
+from typing import List
 
-PythonConfig = namedtuple("python_config", ["formatter", "pyright"])
+PythonConfig = namedtuple("python_config", ["formatter", "pyright", "editorconfig"])
 
-
+EDITORCONFIG_PATH = ".editorconfig"
+EDITORCONFIG_TEMPLATE_PATH = "./src/repo_config_templates/editorconfig.template"
 JSON_INDENT = 2
 JSON_SORT_KEYS = True
 PYRIGHT_CONFIG = {
@@ -24,17 +26,17 @@ PYRIGHT_CONFIG = {
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
 VSCODE_PYTHON_CONFIG = {
     "python.formatting.provider": "yapf",
-    "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True}
+    "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True},
 }
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
 # TODO(sam) add templates
 # setup.cfg template
-# .editorconfig
+# VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 
 
 def get_cli_args():
     parser = argparse.ArgumentParser(description="Get language repo setup")
-    parser.add_argument("language", choices=["python", "js"])
+    parser.add_argument("language", choices=["python", "py", "javascript", "js"])
     args = parser.parse_args()
     language = args.__getattribute__("language")
     return language
@@ -48,39 +50,59 @@ def make_dir(dir_name: str):
 def write_json_file(output_file_path: str, file_config: dict, output_message: str = ""):
     with open(output_file_path, "w") as outfile:
         json.dump(file_config, outfile, indent=JSON_INDENT, sort_keys=JSON_SORT_KEYS)
-    print(f"👍 File {output_file_path} created. {output_message}")
+    print(f"👍  File {output_file_path} created. {output_message}")
+
+
+def write_file(output_file_path: str, file_template: str, output_message: str = ""):
+    with open(output_file_path, "w") as output_file:
+        file_in = open(file_template)
+        output_file.write(file_in.read())
+    print(f"👍  File {output_file_path} created. {output_message}")
+
+
+def get_user_input(input_str: str, input_validation: List[str]):
+    while True:
+        user_input = input(input_str + "\n")
+        if user_input.lower() not in (input_validation):
+            print("Invalid entry, please try again")
+        else:
+            return user_input
 
 
 def confirm_python_config():
+    input_validation_yes_no = ["yes", "no", "y", "n"]
     formatter_config = False
     pyright_config = False
-    invalid_entry_message = "Invalid entry, please try again"
+    editorconfig = False
 
-    while True:
-        formatter_input = input("black or yapf formatting? (black | b | yapf | y) \n")
-        if formatter_input.lower() not in ("b", "y", "black", "yapf"):
-            print(invalid_entry_message)
-        else:
-            break
-    while True:
-        pyright_input = input("add pyright config (yes | y | no | n)? \n")
-        if pyright_input.lower() not in ("yes", "no", "y", "n"):
-            print(invalid_entry_message)
-        else:
-            break
-
-    if formatter_input.lower() in ("yapf", "y"):
+    formatter_required = get_user_input(
+        input_str="black or yapf formatting? (black | b | yapf | y)",
+        input_validation=["b", "y", "black", "yapf"],
+    )
+    if formatter_required.lower() in ["yapf", "y"]:
         formatter_config = True
-    if pyright_input.lower() in ("yes", "no"):
+
+    pyright_required = get_user_input(
+        input_str="add pyright config (yes | y | no | n)?",
+        input_validation=input_validation_yes_no,
+    )
+    if pyright_required.lower() in ["yes", "y"]:
         pyright_config = True
 
-    python_config = PythonConfig(formatter_config, pyright_config)
+    editorconfig_required = get_user_input(
+        input_str="add .editorconfig (yes | y | no | n)?",
+        input_validation=input_validation_yes_no,
+    )
+    if editorconfig_required.lower() in ["yes", "y"]:
+        editorconfig = True
+
+    python_config = PythonConfig(formatter_config, pyright_config, editorconfig)
 
     return python_config
 
 
 def create_repo_files(language: str):
-    if language == "python":
+    if language.lower() in ["python", "py"]:
         python_config = confirm_python_config()
         if python_config.formatter:
             make_dir("./.vscode")
@@ -94,6 +116,13 @@ def create_repo_files(language: str):
                 file_config=PYRIGHT_CONFIG,
                 output_message="Be sure to update the settings specific to the repo",
             )
+        if python_config.editorconfig:
+            write_file(
+                output_file_path=EDITORCONFIG_PATH,
+                file_template=EDITORCONFIG_TEMPLATE_PATH,
+            )
+    elif language.lower() in ["js", "javascript"]:
+        print("js let's do this")
     else:
         print(f"Config files not yet implemented for language {language}")
 
