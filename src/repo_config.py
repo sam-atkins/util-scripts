@@ -4,6 +4,9 @@ Adds template config files to a repo. Run in the destination repo to add these f
 VS Code defaults are set to Black, formatOnSave True and formatOnPaste False.
 A VS Code settings file can be added to override with Yapf formatting to override on
 a repo specific basis
+
+TODO(sam) refactor to make it configuration based to simplify adding/removing config
+          files to a script workflow
 """
 import argparse
 from collections import namedtuple
@@ -14,6 +17,7 @@ from typing import List
 PythonConfig = namedtuple(
     "python_config", ["formatter", "pyright", "editorconfig", "setup_cfg"]
 )
+JSConfig = namedtuple("js_config", ["theme", "editorconfig"])
 
 EDITORCONFIG_PATH = ".editorconfig"
 EDITORCONFIG_TEMPLATE_PATH = "./src/repo_config_templates/editorconfig.template"
@@ -28,13 +32,12 @@ PYRIGHT_CONFIG = {
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
 SETUP_CFG_PATH = "setup.cfg"
 SETUP_CFG_TEMPLATE_PATH = "./src/repo_config_templates/setup.cfg.template"
+VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 VSCODE_PYTHON_CONFIG = {
     "python.formatting.provider": "yapf",
     "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True},
 }
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
-# TODO(sam) js
-# VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 
 
 def get_cli_args():
@@ -70,6 +73,22 @@ def get_user_input(input_str: str, input_validation: List[str]):
             print("Invalid entry, please try again")
         else:
             return user_input
+
+
+def confirm_js_config():
+    input_validation_yes_no = ["yes", "no", "y", "n"]
+    editorconfig = False
+    theme = True
+    editorconfig_required = get_user_input(
+        input_str="add .editorconfig (yes | y | no | n)?",
+        input_validation=input_validation_yes_no,
+    )
+    if editorconfig_required.lower() in ["yes", "y"]:
+        editorconfig = True
+
+    js_config = JSConfig(theme, editorconfig)
+
+    return js_config
 
 
 def confirm_python_config():
@@ -139,7 +158,17 @@ def create_repo_files(language: str):
                 output_file_path=SETUP_CFG_PATH, file_template=SETUP_CFG_TEMPLATE_PATH
             )
     elif language.lower() in ["js", "javascript"]:
-        print("js let's do this")
+        js_config = confirm_js_config()
+        if js_config.theme:
+            make_dir("./.vscode")
+            write_json_file(
+                output_file_path=VSCODE_SETTINGS_FILE_PATH, file_config=VSCODE_JS_CONFIG
+            )
+        if js_config.editorconfig:
+            write_file(
+                output_file_path=EDITORCONFIG_PATH,
+                file_template=EDITORCONFIG_TEMPLATE_PATH,
+            )
     else:
         print(f"Config files not yet implemented for language {language}")
 
