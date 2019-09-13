@@ -9,6 +9,8 @@ a repo specific basis
 Ensure you have a HOME env variable setup
 
 TODO(sam)
+- amend write function to append if json (./vscode/settings.json) already exists
+- update venv path in pyright
 - refactor to make it configuration based to simplify changing a script workflow
 - add flags e.g. --menu asks for options of what files to add; --pyright adds pyright
 """
@@ -34,9 +36,9 @@ JSON_INDENT = 2
 JSON_SORT_KEYS = True
 PYRIGHT_CONFIG = {
     "include": ["src", "test"],
-    "venvPath": "./env/bin/python",
+    "venvPath": f"{os.getcwd()}",
     "venv": "env",
-    "pythonVersion": "3.6",
+    "pythonVersion": "3.7",
 }
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
 SETUP_CFG_PATH = "setup.cfg"
