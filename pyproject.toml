@@ -5,7 +5,7 @@ description = "Python script to automate retrieving and setting AWS multi-factor
 authors = ["Sam Atkins <samatkins@outlook.com>"]
 
 [tool.poetry.dependencies]
-python = "3.6.6"
+python = "3.7.3"
 python-dotenv = "^0.9.1"
 requests = "^2.20"
 
