@@ -10,7 +10,6 @@ Ensure you have a HOME env variable setup
 
 TODO(sam)
 - amend write function to append if json (./vscode/settings.json) already exists
-- update venv path in pyright
 - refactor to make it configuration based to simplify changing a script workflow
 - add flags e.g. --menu asks for options of what files to add; --pyright adds pyright
 """
@@ -29,21 +28,19 @@ JSConfig = namedtuple("js_config", ["theme", "editorconfig"])
 
 HOME = os.environ["HOME"]
 EDITORCONFIG_PATH = ".editorconfig"
-EDITORCONFIG_TEMPLATE_PATH = (
-    f"{HOME}/code/util-scripts/src/repo_config_templates/editorconfig.template"
-)
+EDITORCONFIG_TEMPLATE_PATH = f"{HOME}/code/util-scripts/src/repo_config/repo_config_templates/editorconfig.template"
 JSON_INDENT = 2
 JSON_SORT_KEYS = True
 PYRIGHT_CONFIG = {
     "include": ["src", "test"],
     "venvPath": f"{os.getcwd()}",
-    "venv": "env",
+    "venv": "venv",
     "pythonVersion": "3.7",
 }
 PYRIGHT_SETTINGS_FILE_PATH = "./pyrightconfig.json"
 SETUP_CFG_PATH = "setup.cfg"
 SETUP_CFG_TEMPLATE_PATH = (
-    f"{HOME}/code/util-scripts/src/repo_config_templates/setup.cfg.template"
+    f"{HOME}/code/util-scripts/src/repo_config/repo_config_templates/setup.cfg.template"
 )
 VSCODE_JS_CONFIG = {"workbench.colorTheme": "Default Dark+"}
 VSCODE_PYTHON_CONFIG = {
@@ -51,9 +48,7 @@ VSCODE_PYTHON_CONFIG = {
     "[python]": {"editor.formatOnSave": False, "editor.formatOnPaste": True},
 }
 VSCODE_PY_DEV_DEPENDENCIES_PATH = "./.vscode/requirements-dev.txt"
-VSCODE_PY_DEV_DEPENDENCIES_TEMPLATE_PATH = (
-    f"{HOME}/code/util-scripts/src/repo_config_templates/requirements-dev.txt.template"
-)
+VSCODE_PY_DEV_DEPENDENCIES_TEMPLATE_PATH = f"{HOME}/code/util-scripts/src/repo_config/repo_config_templates/requirements-dev.txt.template"
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
 
 
