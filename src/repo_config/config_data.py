@@ -20,7 +20,17 @@ import os
 
 HOME = os.environ["HOME"]
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
-
+MANDATORY_KEYS = [
+    "config_name",
+    "description",
+    "language",
+    "input_str",
+    "input_validation",
+    "config_format_JSON",
+    "file_config_template",
+    "config_destination_path",
+    "output_message",
+]
 CONFIG = [
     {
         "config_name": "py_formatter",

@@ -5,20 +5,25 @@ VS Code defaults are set to Black, formatOnSave True and formatOnPaste False.
 A VS Code settings file can be added to override with Yapf formatting to override on
 a repo specific basis
 
-##### SETUP #####
-Ensure you have a HOME env variable setup
+#################### SETUP ####################
+
+    Ensure you have a HOME env variable setup
+
+###############################################
 
 TODO(sam)
 - amend write function to append if json (./vscode/settings.json) already exists
-- add fn to validate each dict is valid with CONFIG
-- add flags e.g. --menu asks for options of what files to add; --pyright adds pyright
+- docstrings
 """
 import argparse
 import json
 import os
+import sys
+
+
 from typing import List, Optional
 
-from config_data import CONFIG
+from config_data import CONFIG, MANDATORY_KEYS
 
 
 JSON_INDENT = 2
@@ -26,7 +31,7 @@ JSON_SORT_KEYS = True
 
 
 def main():
-    # TODO(sam) validate config dict has all required keys
+    validate_config_keys()
     language = get_cli_args()
     config_list = build_config_list(language=language)
     create_repo_files(config_list=config_list)
@@ -38,6 +43,14 @@ def get_cli_args():
     args = parser.parse_args()
     language = args.__getattribute__("language")
     return language
+
+
+def validate_config_keys():
+    for key in MANDATORY_KEYS:
+        for conf in CONFIG:
+            if key not in conf:
+                print(f"'{key}' missing from config for '{conf['config_name']}'")
+                sys.exit()
 
 
 def build_config_list(language: str) -> List[str]:
