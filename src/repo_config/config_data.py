@@ -82,7 +82,7 @@ CONFIG = [
         "config_format_JSON": False,
         "file_config_template": f"{HOME}/code/util-scripts/src/repo_config/repo_config_templates/requirements-dev.txt.template",  # noqa E501
         "config_destination_path": "./.vscode/requirements-dev.txt",
-        "output_message": "",
+        "output_message": "Run the following as necessary:\n\n\tvirtualenv -p python3.6 venv\n\tsource venv/bin/activate\n\tpip install -r ./.vscode/requirements-dev.txt\n",  # noqa E501
     },
     {
         "config_name": "setup_cfg",
