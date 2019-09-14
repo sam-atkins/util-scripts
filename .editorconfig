@@ -1,14 +1,19 @@
+http://EditorConfig.org
+
 root = true
 
 [*]
-indent_style = space
 charset = utf-8
-trim_trailing_whitespace = true
+end_of_line = lf
+indent_style = space
 insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.{py}]
 indent_size = 4
 
-[*.{js,yml,md,json,css,html,sh}]
-indent_style = space
+[*.{conf,css,html,js,json,md,scss,sh,toml,ts,yaml,yml}]
+indent_size = 2
+
+[package.json]
 indent_size = 2
