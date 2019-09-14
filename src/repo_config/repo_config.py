@@ -10,9 +10,6 @@ a repo specific basis
     Ensure you have a HOME env variable setup
 
 ###############################################
-
-TODO(sam)
-- docstrings
 """
 import argparse
 import json
@@ -24,27 +21,40 @@ from typing import List, Optional
 
 from config_data import CONFIG, MANDATORY_KEYS
 
-
+COMMAND_LINE_ARG_CHOICES = ["python", "py", "javascript", "js"]
 JSON_INDENT = 2
 JSON_SORT_KEYS = True
 
 
 def main():
+    """
+    Control flow for the script
+    """
     validate_config_keys()
     language = get_cli_args()
     config_list = build_config_list(language=language)
     create_repo_files(config_list=config_list)
 
 
-def get_cli_args():
+def get_cli_args() -> str:
+    """
+    Setups up the available arguments that can be passed in at the command line when
+    running this
+
+    Returns:
+        str: the language specified by the user running the script
+    """
     parser = argparse.ArgumentParser(description="Get language repo setup")
-    parser.add_argument("language", choices=["python", "py", "javascript", "js"])
+    parser.add_argument("language", choices=COMMAND_LINE_ARG_CHOICES)
     args = parser.parse_args()
     language = args.__getattribute__("language")
     return language
 
 
 def validate_config_keys():
+    """
+    Validates that all the dictionaries in config_date.CONFIG have the mandatory keys
+    """
     for key in MANDATORY_KEYS:
         for conf in CONFIG:
             if key not in conf:
@@ -80,7 +90,20 @@ def build_config_list(language: str) -> List[str]:
     return config_list
 
 
-def get_user_input(input_str: Optional[str], input_validation: Optional[List[str]]):
+def get_user_input(
+    input_str: Optional[str], input_validation: Optional[List[str]]
+) -> str:
+    """
+    Gets user input via the command line through a series of questions. User responses
+    are validated
+
+    Args:
+        input_str (Optional[str]): A question to the user if they want to add a config
+        input_validation (Optional[List[str]]): Use to validate the user response
+
+    Returns:
+        str: the validated user response
+    """
     while True:
         user_input = input(input_str + "\n")
         if user_input.lower() not in (input_validation):
@@ -90,6 +113,13 @@ def get_user_input(input_str: Optional[str], input_validation: Optional[List[str
 
 
 def create_repo_files(config_list: List[str]):
+    """
+    Iterates through config_data.CONFIG and if the config_name is in the passed in list
+    writes the config file to the user's repo
+
+    Args:
+        config_list (List[str]): A list of config files the user has selected
+    """
     make_dir("./.vscode")
 
     for conf in CONFIG:
@@ -112,6 +142,12 @@ def create_repo_files(config_list: List[str]):
 
 
 def make_dir(dir_name: str):
+    """
+    Makes a directory if it did not previously exist
+
+    Args:
+        dir_name (str): the directory name
+    """
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
         print("Created empty ./.vscode folder")
@@ -144,6 +180,15 @@ def write_json_file(output_file_path: str, file_config: dict, output_message: st
 
 
 def write_file(output_file_path: str, file_template: str, output_message: str = ""):
+    """
+    Writes a file to the specified output file path
+
+    Args:
+        output_file_path (str): the destination where the file is written
+        file_template (str): the path of the template file
+        output_message (str, optional): Any optional message to print to the user once
+                                        the file is written. Defaults to "".
+    """
     with open(output_file_path, "w") as output_file:
         file_in = open(file_template)
         output_file.write(file_in.read())
