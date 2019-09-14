@@ -12,7 +12,6 @@ a repo specific basis
 ###############################################
 
 TODO(sam)
-- amend write function to append if json (./vscode/settings.json) already exists
 - docstrings
 """
 import argparse
@@ -118,11 +117,30 @@ def make_dir(dir_name: str):
         print("Created empty ./.vscode folder")
 
 
-# TODO(sam) append if JSON file already exists
 def write_json_file(output_file_path: str, file_config: dict, output_message: str = ""):
-    with open(output_file_path, "w") as outfile:
+    """
+    Writes a JSON file to the specified output file path. The append functionality is
+    basic and just appends another JSON object to the existing one, requiring manual
+    fix to correct the syntax. Improving this is a TODO for another day.
+
+    Args:
+        output_file_path (str): the destination where the JSON is written
+        file_config (dict): the JSON contents to be written
+        output_message (str, optional): Any optional message to print to the user once
+                                        the file is written. Defaults to "".
+    """
+    mode = "w"
+    complete_message = f"👍  File {output_file_path} created. {output_message}"
+    if os.path.isfile(output_file_path):
+        mode = "a"
+        complete_message = (
+            f"👍  Added config to {output_file_path}, pls correct any issues with the "
+            f"JSON file syntax. {output_message}"
+        )
+
+    with open(output_file_path, mode) as outfile:
         json.dump(file_config, outfile, indent=JSON_INDENT, sort_keys=JSON_SORT_KEYS)
-    print(f"👍  File {output_file_path} created. {output_message}")
+    print(complete_message)
 
 
 def write_file(output_file_path: str, file_template: str, output_message: str = ""):
