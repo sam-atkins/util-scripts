@@ -191,7 +191,6 @@ def write_file(output_file_path: str, file_template: str, output_message: str = 
         output_message (str, optional): Any optional message to print to the user once
                                         the file is written. Defaults to "".
     """
-    print(f"output msg: {output_message}")
     with open(output_file_path, "w") as output_file:
         file_in = open(file_template)
         output_file.write(file_in.read())
