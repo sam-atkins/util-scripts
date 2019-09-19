@@ -19,11 +19,7 @@ import sys
 
 from typing import List, Optional
 
-from config_data import CONFIG, MANDATORY_KEYS
-
-COMMAND_LINE_ARG_CHOICES = ["python", "py", "javascript", "js"]
-JSON_INDENT = 2
-JSON_SORT_KEYS = True
+import config_data
 
 
 def main():
@@ -45,7 +41,7 @@ def get_cli_args() -> str:
         str: the language specified by the user running the script
     """
     parser = argparse.ArgumentParser(description="Get language repo setup")
-    parser.add_argument("language", choices=COMMAND_LINE_ARG_CHOICES)
+    parser.add_argument("language", choices=config_data.COMMAND_LINE_ARG_CHOICES)
     args = parser.parse_args()
     language = args.__getattribute__("language")
     return language
@@ -55,8 +51,8 @@ def validate_config_keys():
     """
     Validates that all the dictionaries in config_date.CONFIG have the mandatory keys
     """
-    for key in MANDATORY_KEYS:
-        for conf in CONFIG:
+    for key in config_data.MANDATORY_KEYS:
+        for conf in config_data.CONFIG:
             if key not in conf:
                 print(f"'{key}' missing from config for '{conf['config_name']}'")
                 sys.exit()
@@ -73,7 +69,7 @@ def build_config_list(language: str) -> List[str]:
         List[str]: List of configs required e.g. ['py_formatter', 'pyright']
     """
     config_list = []
-    for conf in CONFIG:
+    for conf in config_data.CONFIG:
         if language in conf.get("language"):
 
             input_str = conf.get("input_str")
@@ -122,7 +118,7 @@ def create_repo_files(config_list: List[str]):
     """
     make_dir("./.vscode")
 
-    for conf in CONFIG:
+    for conf in config_data.CONFIG:
         name = conf.get("config_name")
         if name in config_list:
             config_destination_path = conf.get("config_destination_path")
@@ -177,7 +173,12 @@ def write_json_file(output_file_path: str, file_config: dict, output_message: st
         )
 
     with open(output_file_path, mode) as outfile:
-        json.dump(file_config, outfile, indent=JSON_INDENT, sort_keys=JSON_SORT_KEYS)
+        json.dump(
+            file_config,
+            outfile,
+            indent=config_data.JSON_INDENT,
+            sort_keys=config_data.JSON_SORT_KEYS,
+        )
     print(complete_message)
 
 

@@ -15,11 +15,17 @@ key/value pair is mandatory.
         "config_destination_path": "/destination/path/filename.txt",
         "output_message": "Optional message to print after file created",
     }
+If adding config for a language not listed in COMMAND_LINE_ARG_CHOICES then add to
+this list
 """
 import os
 
+COMMAND_LINE_ARG_CHOICES = ["python", "py", "javascript", "js", "golang", "go"]
 HOME = os.environ["HOME"]
+JSON_INDENT = 2
+JSON_SORT_KEYS = True
 VSCODE_SETTINGS_FILE_PATH = "./.vscode/settings.json"
+
 MANDATORY_KEYS = [
     "config_name",
     "description",
@@ -31,6 +37,7 @@ MANDATORY_KEYS = [
     "config_destination_path",
     "output_message",
 ]
+
 CONFIG = [
     {
         "config_name": "py_formatter",
@@ -65,7 +72,7 @@ CONFIG = [
     {
         "config_name": "editorconfig",
         "description": "",
-        "language": ["python", "py", "javascript", "js"],
+        "language": ["python", "py", "javascript", "js", "golang", "go"],
         "input_str": "add .editorconfig (yes | no)?",
         "input_validation": ["yes", "no", "y", "n"],
         "config_format_JSON": False,
@@ -96,10 +103,10 @@ CONFIG = [
         "output_message": "",
     },
     {
-        "config_name": "vscode_js_config",
-        "description": "Adds JS specific config to VS Code",
-        "language": ["javascript", "js"],
-        "input_str": "change theme for JS dev? (yes | no)?",
+        "config_name": "vscode_theme_config",
+        "description": "Adds theme config to VS Code",
+        "language": ["javascript", "js", "golang", "go"],
+        "input_str": "change theme for JS/Go dev? (yes | no)?",
         "input_validation": ["yes", "no", "y", "n"],
         "config_format_JSON": True,
         "file_config_template": {"workbench.colorTheme": "Default Dark+"},
