@@ -13,7 +13,7 @@ indent_size = 4
 indent_style = space
 
 [*.go]
-indent_size = 2
+indent_size = 4
 indent_style = tab
 
 [*.{conf,css,html,js,json,md,scss,sh,toml,ts,yaml,yml}]
