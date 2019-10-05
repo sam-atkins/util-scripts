@@ -62,9 +62,10 @@ CONFIG = [
         "config_format_JSON": True,
         "file_config_template": {
             "include": ["src", "test"],
+            "pythonVersion": "3.7",
+            "reportMissingImports": False,
             "venvPath": f"{os.getcwd()}",
             "venv": "venv",
-            "pythonVersion": "3.7",
         },
         "config_destination_path": "./pyrightconfig.json",
         "output_message": "Be sure to update the settings specific to the repo",

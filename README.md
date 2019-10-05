@@ -4,9 +4,22 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 
 ## Table of Contents
 
-- [Script Usage](#script-usage)
-- [Installation](#installation)
-- [Tests](#tests)
+- [Utility Scripts](#utility-scripts)
+  - [Table of Contents](#table-of-contents)
+  - [Script Usage](#script-usage)
+    - [Set AWS Creds](#set-aws-creds)
+    - [Todoist API](#todoist-api)
+    - [Repo Config](#repo-config)
+    - [Foreign Currency Exchange](#foreign-currency-exchange)
+    - [Weather](#weather)
+  - [Installation](#installation)
+    - [Pre-requisites](#pre-requisites)
+    - [Git clone and add to $PATH](#git-clone-and-add-to-path)
+    - [Python set-up](#python-set-up)
+    - [AWS creds set-up](#aws-creds-set-up)
+    - [Add an `.env` file](#add-an-env-file)
+    - [Todoist API setup](#todoist-api-setup)
+  - [Tests](#tests)
 
 ## Script Usage
 
@@ -18,6 +31,35 @@ Used to request session tokens as part of using AWS CLI when your AWS profile ha
 creds <profile> <mfa-token>
 ```
 
+### Todoist API
+
+Add an alias `todo` to the bash script entrypoint file `todoist.sh`.
+
+```bash
+# quick add a task
+todo -t 'buy milk #shopping today'
+
+# import a template
+todo -f ticket
+
+# display help
+todo --help
+```
+
+### Repo Config
+
+Adds various config files when setting up a new repo including:
+
+- `pyrightconfig.json` and if default Black formatting settings need to be overridden,
+- adds `./.vscode/settings.json` with appropriate Python config.
+
+```bash
+repo-config <language>
+
+# python
+repo-config python
+```
+
 ### Foreign Currency Exchange
 
 ```bash
@@ -26,29 +68,6 @@ fx
 # type currency abbreviations correctly
 ```
 
-### Movie
-
-```bash
-movie <film title>
-
-# example, single word film title
-movie jaws
-
-# example, multi-word film title
-movie 'star wars'
-```
-
-### Repo Config
-
-Adds `pyrightconfig.json` and if default Black formatting settings need to be overridden,
-adds `./.vscode/settings.json` with appropriate Python config.
-
-```bash
-repo-config <language>
-
-# python
-repo-config python
-```
 
 ### Weather
 
@@ -106,6 +125,18 @@ Follow AWS CLI [docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-confi
 
 ### Add an `.env` file
 Convert the `.env.template` to an `.env` file and populate the details with AWS credentials. The list of profile prefixes must match the start of the profile info, per the template file.
+
+### Todoist API setup
+
+- Add the API key and project ids to .env
+- Add csv templates to the template directory
+- Check the config in `src/todo/config.py` aligns with the templates
+
+To add a new template to import, follow these steps:
+
+1. Add the template to the `/template` directory
+2. Add the template name to the `KNOWN_FILES` list
+3. Add the required config to the dict in `src/todo/config.py`
 
 ## Tests
 
