@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# removes all non-running containers
+docker rm $(docker ps -q -a);
