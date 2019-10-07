@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Run a bash shell in the specified container (with docker-compose).
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $FUNCNAME CONTAINER_NAME"
+  return 1
+fi
+
+echo "CMD: docker-compose run --entrypoint="" $1 /bin/bash";
+docker-compose run --entrypoint="" $1 /bin/bash
