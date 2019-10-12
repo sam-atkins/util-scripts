@@ -22,13 +22,14 @@ from config import FILE_CONFIG
 
 
 API_KEY = os.environ["Todoist_API_Key"]
-KNOWN_FILES = ["review", "ticket"]
+KNOWN_FILES = ["blog", "review", "ticket"]
 
 
 @click.command()
 @click.option("-t", "--task")
 @click.option("-f", "--file")
-def main(task, file):
+@click.option("-p", "--projects", is_flag=True)
+def main(task, file, projects):
     if task:
         todoist_quick_add(task)
 
@@ -38,6 +39,9 @@ def main(task, file):
                 f"Not a known file template, try one of {KNOWN_FILES}"
             )
         todoist_import_template_into_project(template_name=file)
+
+    if projects:
+        get_todoist_projects()
 
 
 def todoist_quick_add(task):
@@ -52,6 +56,12 @@ def todoist_quick_add(task):
     else:
         api.commit()
         print(f"Success - added task: {task}")
+
+
+def get_todoist_projects():
+    api = todoist.TodoistAPI(API_KEY)
+    api.sync()
+    print(api.state["projects"])
 
 
 def todoist_import_template_into_project(template_name):
