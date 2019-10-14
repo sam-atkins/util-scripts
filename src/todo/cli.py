@@ -9,7 +9,8 @@ Todoist API integration. Run -h or --help for guidance
     Todoist_API_Key
     PROJECT_WORK_ID
     PROJECT_ADMIN_ID
-    <plus any other projects you want to import templates into>
+    etc
+    <plus any other projects you want to import templates into ie. check config.py>
 
 ###############################################
 """
@@ -22,7 +23,7 @@ from config import FILE_CONFIG
 
 
 API_KEY = os.environ["Todoist_API_Key"]
-KNOWN_FILES = ["blog", "review", "ticket"]
+KNOWN_FILES = ["blog", "pack", "review", "ticket"]
 
 
 @click.command()
