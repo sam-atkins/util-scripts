@@ -7,7 +7,6 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 - [Utility Scripts](#utility-scripts)
   - [Table of Contents](#table-of-contents)
   - [Script Usage](#script-usage)
-    - [Todoist API](#todoist-api)
     - [Repo Config](#repo-config)
     - [Foreign Currency Exchange](#foreign-currency-exchange)
     - [Weather](#weather)
@@ -15,25 +14,9 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
     - [Pre-requisites](#pre-requisites)
     - [Git clone and add to $PATH](#git-clone-and-add-to-path)
     - [Python set-up](#python-set-up)
-    - [Todoist API setup](#todoist-api-setup)
   - [Tests](#tests)
 
 ## Script Usage
-
-### Todoist API
-
-Add an alias `todo` to the bash script entrypoint file `todoist.sh`.
-
-```bash
-# quick add a task
-todo -t 'buy milk #shopping today'
-
-# import a template
-todo -f ticket
-
-# display help
-todo --help
-```
 
 ### Repo Config
 
@@ -107,18 +90,6 @@ Install Python dependencies using [Poetry](https://poetry.eustace.io/docs/cli/):
 ```bash
 poetry install
 ```
-
-### Todoist API setup
-
-- Add the API key and project ids to .env
-- Add csv templates to the template directory
-- Check the config in `src/todo/config.py` aligns with the templates
-
-To add a new template to import, follow these steps:
-
-1. Add the template to the `/template` directory
-2. Add the template name to the `KNOWN_FILES` list
-3. Add the required config to the dict in `src/todo/config.py`
 
 ## Tests
 
