@@ -1,7 +1,0 @@
-#!/bin/bash
-
-source /Users/samatkins/code/util-scripts/venv/bin/activate;
-
-python /Users/samatkins/code/util-scripts/src/set_creds.py $1 $2;
-
-source /Users/samatkins/.bh_creds/aws;

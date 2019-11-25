@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "set-creds"
 version = "0.1.0"
-description = "Python script to automate retrieving and setting AWS multi-factor authentication credentials for AWS CLI use."
+description = ""
 authors = ["Sam Atkins <samatkins@outlook.com>"]
 
 [tool.poetry.dependencies]

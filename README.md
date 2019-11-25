@@ -7,7 +7,6 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 - [Utility Scripts](#utility-scripts)
   - [Table of Contents](#table-of-contents)
   - [Script Usage](#script-usage)
-    - [Set AWS Creds](#set-aws-creds)
     - [Todoist API](#todoist-api)
     - [Repo Config](#repo-config)
     - [Foreign Currency Exchange](#foreign-currency-exchange)
@@ -16,20 +15,10 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
     - [Pre-requisites](#pre-requisites)
     - [Git clone and add to $PATH](#git-clone-and-add-to-path)
     - [Python set-up](#python-set-up)
-    - [AWS creds set-up](#aws-creds-set-up)
-    - [Add an `.env` file](#add-an-env-file)
     - [Todoist API setup](#todoist-api-setup)
   - [Tests](#tests)
 
 ## Script Usage
-
-### Set AWS Creds
-
-Used to request session tokens as part of using AWS CLI when your AWS profile has MFA set-up.
-
-```bash
-creds <profile> <mfa-token>
-```
 
 ### Todoist API
 
@@ -118,13 +107,6 @@ Install Python dependencies using [Poetry](https://poetry.eustace.io/docs/cli/):
 ```bash
 poetry install
 ```
-
-### AWS creds set-up
-
-Follow AWS CLI [docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) to set it up and configure profiles. Profile information should be manually copied across into the `.env` file per the below.
-
-### Add an `.env` file
-Convert the `.env.template` to an `.env` file and populate the details with AWS credentials. The list of profile prefixes must match the start of the profile info, per the template file.
 
 ### Todoist API setup
 
