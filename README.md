@@ -7,7 +7,6 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 - [Utility Scripts](#utility-scripts)
   - [Table of Contents](#table-of-contents)
   - [Script Usage](#script-usage)
-    - [Repo Config](#repo-config)
     - [Foreign Currency Exchange](#foreign-currency-exchange)
     - [Weather](#weather)
   - [Installation](#installation)
@@ -18,20 +17,6 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 
 ## Script Usage
 
-### Repo Config
-
-Adds various config files when setting up a new repo including:
-
-- `pyrightconfig.json` and if default Black formatting settings need to be overridden,
-- adds `./.vscode/settings.json` with appropriate Python config.
-
-```bash
-repo-config <language>
-
-# python
-repo-config python
-```
-
 ### Foreign Currency Exchange
 
 ```bash
@@ -39,7 +24,6 @@ fx
 # and follow the prompts. Script is fairly basic at the moment so make sure to
 # type currency abbreviations correctly
 ```
-
 
 ### Weather
 
