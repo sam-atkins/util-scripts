@@ -9,7 +9,6 @@ from subprocess import check_output
 
 
 commit_msg_filepath = sys.argv[1]
-non_ticket_branches = ["master", "main", "dev", "develop"]
 branch = (
     check_output(["git", "symbolic-ref", "--short", "HEAD"]).decode("utf-8").strip()
 )
@@ -19,8 +18,5 @@ if re.match(regex, branch):
     issue_number = re.match(regex, branch).group(2)
     with open(commit_msg_filepath, "r+") as f:
         commit_msg = f.read()
-        f.seek(0, 0)
+        f.seek(0, 0)  # correctly positions issue_number when writing commit message
         f.write(f"[{issue_number}] {commit_msg}")
-elif branch not in non_ticket_branches:
-    print("Incorrect branch name")
-    sys.exit(1)
