@@ -28,4 +28,5 @@ Other util scripts, usually written in Python, have their own repo. Links below:
 - [CookieCutter: Python CLI app](https://github.com/sam-atkins/cookiecutter-python-cli)
 - [Currency converter](https://github.com/sam-atkins/fx)
 - [Get AWS MFA Creds](https://github.com/sam-atkins/awscrd-cli)
+- [Add boilerplate repo config](https://github.com/sam-atkins/repoconf)
 - [Todoist API wrapper](https://github.com/sam-atkins/todo-cli)
