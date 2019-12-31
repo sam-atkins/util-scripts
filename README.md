@@ -7,88 +7,25 @@ A collection of scripts to automate repeated and mundane tasks. Some of these co
 - [Utility Scripts](#utility-scripts)
   - [Table of Contents](#table-of-contents)
   - [Script Usage](#script-usage)
-    - [Foreign Currency Exchange](#foreign-currency-exchange)
-    - [Weather](#weather)
-  - [Installation](#installation)
-    - [Pre-requisites](#pre-requisites)
-    - [Git clone and add to $PATH](#git-clone-and-add-to-path)
-    - [Python set-up](#python-set-up)
-  - [Tests](#tests)
+  - [Git Hooks](#git-hooks)
+  - [Links to other scripts](#links-to-other-scripts)
 
 ## Script Usage
 
-### Foreign Currency Exchange
+Check each script's documentation for usage instructions.
 
-```bash
-fx
-# and follow the prompts. Script is fairly basic at the moment so make sure to
-# type currency abbreviations correctly
-```
+## Git Hooks
 
-### Weather
+TODO(sam)
 
-```bash
-# Usage: `weather CITYNAME` or just `weather` to use IP location.
-weather <city>
-```
+* setup: global hooks point Git at `{$HOME}/code/util-scripts/git_hooks/`
+* add documentation
 
-## Installation
+## Links to other scripts
 
-### Pre-requisites
+Other util scripts, usually written in Python, have their own repo. Links below:
 
-* Python 3
-* Poetry
-
-(And for the AWS credentials script)
-
-* AWS CLI
-* AWS credentials file per [this](https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/)
-
-### Git clone and add to $PATH
-
-* Git clone the repo to a local directory.
-* Add the directory to path so all scripts can be called from any location.
-  * in `~/.bashrc` for the bash shell
-  * in `~/.zshrc` for the zsh shell
-
-```bash
-export PATH=$PATH:~/{code-directory}/util-scripts
-```
-
-* Make the scripts executable
-
-```bash
-chmod u+x ./{script_name}
-```
-
-### Python set-up
-
-Create a virtualenv
-
-```bash
-virtualenv -p python3 env
-```
-
-Install Python dependencies using [Poetry](https://poetry.eustace.io/docs/cli/):
-
-```bash
-poetry install
-```
-
-## Tests
-
-To run tests:
-
-```bash
-# activate virtual env
-source env/bin/activate
-
-# run tests
-pytest
-
-# run tests with verbosity
-pytest -vv
-
-# run tests with code coverage
-pytest --cov
-```
+- [CookieCutter: Python CLI app](https://github.com/sam-atkins/cookiecutter-python-cli)
+- [Currency converter](https://github.com/sam-atkins/fx)
+- [Get AWS MFA Creds](https://github.com/sam-atkins/awscrd-cli)
+- [Todoist API wrapper](https://github.com/sam-atkins/todo-cli)

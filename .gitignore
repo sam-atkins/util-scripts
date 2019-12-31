@@ -117,6 +117,4 @@ dmypy.json
 
 # editor config
 .vscode
-
-# project
-src/todo/template/**
+.editorconfig
