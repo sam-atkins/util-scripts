@@ -50,33 +50,33 @@ def main():
         help="Set number of context lines (default 3)",
     )
     parser.add_argument("fromfile")
-    parser.add_argument("tofile")
+    parser.add_argument("to_file")
     options = parser.parse_args()
 
     n = options.lines
     fromfile = options.fromfile
-    tofile = options.tofile
+    to_file = options.to_file
 
     fromdate = file_mtime(fromfile)
-    todate = file_mtime(tofile)
+    to_date = file_mtime(to_file)
     with open(fromfile) as ff:
         fromlines = ff.readlines()
-    with open(tofile) as tf:
-        tolines = tf.readlines()
+    with open(to_file) as tf:
+        to_lines = tf.readlines()
 
     if options.u:
         diff = difflib.unified_diff(
-            fromlines, tolines, fromfile, tofile, fromdate, todate, n=n
+            fromlines, to_lines, fromfile, to_file, fromdate, to_date, n=n
         )
     elif options.n:
-        diff = difflib.ndiff(fromlines, tolines)
+        diff = difflib.ndiff(fromlines, to_lines)
     elif options.m:
         diff = difflib.HtmlDiff().make_file(
-            fromlines, tolines, fromfile, tofile, context=options.c, numlines=n
+            fromlines, to_lines, fromfile, to_file, context=options.c, numlines=n
         )
     else:
         diff = difflib.context_diff(
-            fromlines, tolines, fromfile, tofile, fromdate, todate, n=n
+            fromlines, to_lines, fromfile, to_file, fromdate, to_date, n=n
         )
 
     sys.stdout.writelines(diff)
