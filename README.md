@@ -16,10 +16,25 @@ Check each script's documentation for usage instructions.
 
 ## Git Hooks
 
-TODO(sam)
+To use at a global level run this command:
 
-* setup: global hooks point Git at `{$HOME}/code/util-scripts/git_hooks/`
-* add documentation
+```bash
+git config --global core.hooksPath /path/to/git_hooks
+```
+
+This results in `~/.gitconfig` being updated like this
+
+```
+[core]
+  hooksPath = /path/to/git_hooks
+```
+
+Ensure the git hook is executable e.g.
+
+```bash
+chmod +x /path/to/git_hooks/prepare-commit-msg
+```
+
 
 ## Links to other scripts
 
